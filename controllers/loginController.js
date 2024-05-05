@@ -1,4 +1,7 @@
 const login = require('../database/loginQuerys.js');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+var jwt = require('jsonwebtoken');
 
 exports.createUser = (req, res) => {
 
@@ -9,10 +12,12 @@ exports.createUser = (req, res) => {
         })
     }
 
+    const hash = bcrypt.hashSync(req.body.password, saltRounds);
+
     const user = {
         id: 0,
         user: req.body.user,
-        password: req.body.password,
+        password: hash,
         active: null
     }
 
@@ -51,8 +56,8 @@ exports.loginUser = (req, res) => {
 
     login.logIn(user, (err, data) => {
 
-        if(err)
-        {
+        if(err) {
+
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while login in the user."
@@ -61,13 +66,23 @@ exports.loginUser = (req, res) => {
             return;
         }
 
-        if (!data) 
-        {            
-            res.send("Username or password is wrong!");
-            return;
-        }
+        if (data) {                           
 
-        res.send("User logged succesfully!");        
+            if (bcrypt.compareSync(user.password, data[0].PASSWORD)) {
+                
+                let token = jwt.sign({
+                    user: data[0].USER,
+                  }, 'secret', { expiresIn: '8h' });
+
+                res.send({accessToken: token});        
+                return;
+            }
+            
+            res.send("Either usernarme or password is wrong.");
+            return;
+        }   
+        else 
+            res.status(500).send("Something wrong with the service. Try later.");
     });
 
 }

@@ -12,8 +12,6 @@ const user = () => {
 
 user.create = (user, result) => {
     
-    const hash = bcrypt.hashSync(user.password, saltRounds);
-    user.password = hash;
     user.active = '1';
 
     let query = "INSERT INTO USER_CMS SET ?";
@@ -40,11 +38,8 @@ user.logIn = (user, result) => {
             result(null, err);
             return;
         }    
-
-        if (bcrypt.compareSync(user.password, res[0].PASSWORD))
-            return result(null, true);
         
-        return result(null, false);
+        return result(null, res);
     });
 }
 
