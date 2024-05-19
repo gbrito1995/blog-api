@@ -51,7 +51,7 @@ exports.loginUser = (req, res) => {
         id: 0,
         user: req.body.user,
         password: req.body.password,
-        active: null
+        active: '1'
     }
 
     login.logIn(user, (err, data) => {
