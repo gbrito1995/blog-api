@@ -70,9 +70,14 @@ exports.loginUser = (req, res) => {
 
             if (bcrypt.compareSync(user.password, data[0].PASSWORD)) {
                 
-                let token = jwt.sign({
-                    user: data[0].USER,
-                  }, 'secret', { expiresIn: '8h' });
+                let token = jwt.sign(
+                    { 
+                        user: data[0].USER,
+                        active: data[0].ACTIVE
+                    }, 
+                    `${process.env.SECRET_PASS}`, 
+                    { expiresIn: '8h' }
+                ); 
 
                 res.send({accessToken: token});        
                 return;
@@ -81,8 +86,8 @@ exports.loginUser = (req, res) => {
             res.send("Either usernarme or password is wrong.");
             return;
         }   
-        else 
-            res.status(500).send("Something wrong with the service. Try later.");
+        
+        else res.status(500).send("Something wrong with the service. Try later.");
     });
 
 }

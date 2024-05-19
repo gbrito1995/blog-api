@@ -8,14 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var app = express();
 var jwt = require('jsonwebtoken');
-
-validateToken = (req, res, next) => {
-
-  const isValid = jwt.verify(req.headers.token, 'secret');
-
-  if (isValid) next();
-
-}
+var validateToken = require('./middlewares/validateToken.js'); 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
