@@ -1,7 +1,7 @@
 const login = require('../database/loginQuerys.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 exports.createUser = (req, res) => {
 
@@ -77,7 +77,7 @@ exports.loginUser = (req, res) => {
                     }, 
                     `${process.env.SECRET_PASS}`, 
                     { expiresIn: '8h' }
-                ); 
+                );  
 
                 res.send({accessToken: token});        
                 return;

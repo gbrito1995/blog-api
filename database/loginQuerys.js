@@ -18,7 +18,7 @@ user.create = (user, result) => {
         
     sql.query(query, user, (err, res) => {
 
-        if (err) {
+        if (err) {            
             result(null, err);
             return;
         }
