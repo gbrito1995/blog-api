@@ -67,7 +67,7 @@ exports.loginUser = (req, res) => {
         }
 
         if (data) {                           
-
+                        
             if (bcrypt.compareSync(user.password, data[0].PASSWORD)) {
                 
                 let token = jwt.sign(
