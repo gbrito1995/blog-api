@@ -9,16 +9,16 @@ var validateToken = require('../middlewares/validateToken.js');
 // | | | / __| __| _ \
 // | |_| \__ \ _||   /
 //  \___/|___/___|_|_\
-router.post('/user/create', validateToken, login.createUser);
 router.post('/user/login', login.loginUser);
+router.post('/user/create', validateToken, login.createUser);
 
 //  ___  ___  ___ _____ 
 // | _ \/ _ \/ __|_   _|
 // |  _/ (_) \__ \ | |  
 // |_|  \___/|___/ |_|  
-router.post('/post/create', blogPosts.createPost);
-router.get('/post/all', blogPosts.findAll);
-router.get('/post/:id', blogPosts.findById);
-router.delete('/post/:id', blogPosts.remove);
+router.post('/post/create', validateToken, blogPosts.createPost);
+router.get('/post/all', validateToken, blogPosts.findAll);
+router.get('/post/:id',validateToken, blogPosts.findById);
+router.delete('/post/:id', validateToken, blogPosts.remove);
 
 module.exports = router;
