@@ -14,14 +14,27 @@ blogPost.create = (blogPost, result) => {
 
     sql.query(query, blogPost, (err, res) => {
 
+        if (err) {            
+            result(null, err);
+            return;
+        }        
+        result(null, {id: res.insertId});        
+    });
+}
+
+blogPost.update = (blogPost, result) => {    
+
+    let query = `UPDATE POST SET TITLE = ?, CONTENT = ? WHERE ID = ?`
+    
+    sql.query(query, [blogPost.title, blogPost.content, blogPost.id], (err, res) => {
+
         if (err) {
-            console.log("Error: " + err);
             result(null, err);
             return;
         }
 
-        console.log(`Post created: ${res.insertId}`);
-        result(null, {id: res.insertId});        
+        result(null, "Register updated successfuly.")
+
     });
 }
 
@@ -55,9 +68,8 @@ blogPost.getById = (id, result) => {
             result(null, err);
             return;
         }
-
-        console.log(`Post: ${id}`);
-        result(null, res);
+                
+        result(null, res[0]);
     })
 }
 

@@ -9,7 +9,7 @@ exports.createPost = (req, res) => {
         })
     }
 
-    const post = {
+    let post = {
         id: 0,
         title: req.body.title,
         content: req.body.content,
@@ -85,3 +85,30 @@ exports.remove = (req, res) => {
        } else res.send({message: "Post was deleted succesfully!"});
     });
 };
+
+exports.update = (req, res) => {
+
+    if (!req.body) {
+
+        res.status(400).send({
+            message: "Content can not be null."
+        })
+    }    
+
+    let post = {
+        id: req.params.id,
+        title: req.body.title,
+        content: req.body.content,
+        create_date: req.body.create_date
+    }    
+
+    blogPost.update(post, (err, data) => {
+        
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while updating the post."
+            });
+        else res.send(data);
+    });
+}
