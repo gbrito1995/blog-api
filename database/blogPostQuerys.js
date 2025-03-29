@@ -46,7 +46,7 @@ blogPost.getAll = (result) => {
 
 blogPost.getById = (id, result) => {
 
-    let query = `SELECT * FROM POST WHERE ID = ${id}`;    
+    let query = `SELECT * FROM POST WHERE ID = ${id} ORDER BY CREATE_DATE DESC`;    
 
     sql.query(query, (err, res) => {
 
@@ -57,6 +57,22 @@ blogPost.getById = (id, result) => {
         }
 
         console.log(`Post: ${id}`);
+        result(null, res);
+    })
+}
+
+blogPost.getList = (result) => {    
+    
+    let query = `SELECT ID,TITLE, CREATE_DATE FROM POST ORDER BY CREATE_DATE DESC`;    
+
+    sql.query(query, (err, res) => {
+
+        if (err) {
+            console.log("Error: " + err);
+            result(null, err);
+            return;
+        }
+        
         result(null, res);
     })
 }

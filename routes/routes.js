@@ -18,7 +18,8 @@ router.post('/user/create', validateToken, login.createUser);
 // |_|  \___/|___/ |_|  
 router.post('/post/create', validateToken, blogPosts.createPost);
 router.get('/post/all', validateToken, blogPosts.findAll);
-router.get('/post/:id',validateToken, blogPosts.findById);
-router.delete('/post/:id', validateToken, blogPosts.remove);
+router.get('/post/:id(\\d+)',validateToken, blogPosts.findById);
+router.get('/post/list', validateToken, blogPosts.findAllToList);
+router.delete('/post/:id(\\d+)', validateToken, blogPosts.remove);
 
 module.exports = router;

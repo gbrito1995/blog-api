@@ -46,10 +46,25 @@ exports.findById = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error ocurred while retrieving tutorials."
+                    err.message || "Some error ocurred while retrieving post."
             });
         else
             res.send(data);        
+    });
+};
+
+exports.findAllToList = (req, res) => {
+
+    blogPost.getList((err, data) => {
+
+        if (err)        
+            res.status(500).send({
+                message:
+                err.message || "Some error ocurred while retrieving post's list."
+            });
+        else
+            res.send(data);
+
     });
 };
 
