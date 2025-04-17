@@ -3,6 +3,7 @@ var router = express.Router();
 const blogPosts = require('../controllers/blogPostController.js');
 const login = require('../controllers/loginController.js');
 var validateToken = require('../middlewares/validateToken.js'); 
+const checkToken = require('../controllers/checkToken.js');
 
 
 //  _   _ ___ ___ ___ 
@@ -11,6 +12,7 @@ var validateToken = require('../middlewares/validateToken.js');
 //  \___/|___/___|_|_\
 router.post('/user/login', login.loginUser);
 router.post('/user/create', validateToken, login.createUser);
+router.get('/user/checkToken', checkToken);
 
 //  ___  ___  ___ _____ 
 // | _ \/ _ \/ __|_   _|
