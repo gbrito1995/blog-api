@@ -53,21 +53,6 @@ exports.findById = (req, res) => {
     });
 };
 
-exports.findAllToList = (req, res) => {
-
-    blogPost.getList((err, data) => {
-
-        if (err)        
-            res.status(500).send({
-                message:
-                err.message || "Some error ocurred while retrieving post's list."
-            });
-        else
-            res.send(data);
-
-    });
-};
-
 exports.remove = (req, res) => {
 
     blogPost.remove(req.params.id, (err, data) =>{
