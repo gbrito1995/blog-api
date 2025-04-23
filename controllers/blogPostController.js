@@ -55,6 +55,8 @@ exports.findById = (req, res) => {
 
 exports.remove = (req, res) => {
 
+    console.table(req.body);
+
     blogPost.remove(req.params.id, (err, data) =>{
         if (err) {
             if (err.kind === "not found") {
