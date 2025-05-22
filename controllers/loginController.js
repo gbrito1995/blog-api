@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
-exports.createUser = (req, res) => {
+exports.createUser = (req, res) => {    
 
-    if (!req.body) {
+    if (!req.body.password) {
 
         res.status(400).send({
             message: "Content can not be null."
@@ -38,13 +38,15 @@ exports.createUser = (req, res) => {
     });
 }
 
-exports.loginUser = (req, res) => {
+exports.loginUser = (req, res) => {                
 
-    if (!req.body) {
+    if (Object.keys(req.body).length == 0 || req.body.password == "" || req.body.user == "") {
 
         res.status(400).send({
             message: "Content can not be null."
-        })
+        })        
+
+        return;
     }
 
     const user = {
