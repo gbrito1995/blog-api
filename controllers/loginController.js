@@ -42,8 +42,8 @@ exports.loginUser = (req, res) => {
 
     if (Object.keys(req.body).length == 0 || req.body.password == "" || req.body.user == "") {
 
-        res.status(400).send({
-            message: "Content can not be null."
+        res.status(401).send({
+            message: "Access denied."
         })        
 
         return;
