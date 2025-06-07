@@ -122,8 +122,7 @@ blogPost.getPaginated = (offset, result) => {
         
         if (err) {
 
-            console.log("Error: " + err);
-            result(null, err);
+            result(null, "Error while retrieving data.");
             return;
         }        
 

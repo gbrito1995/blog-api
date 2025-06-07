@@ -101,21 +101,16 @@ exports.update = (req, res) => {
 };
 
 exports.findPaginated = (req, res) => {    
-
-    if (!req.body) {
-
-        res.status(400).send({
-            message: "Content can not be null."
-        })
-    }  
     
-        blogPost.getPaginated(req.body.offset, (err, data) => {
-        if (err)                
-            res.status(500).send({
-                message:
-                    err.message || "Some error ocurred while retrieving tutorials."
-            });
-        else
-            res.send(data);
+    console.table(req.params)
+
+    blogPost.getPaginated(req.params.offset, (err, data) => {
+    if (err)                
+        res.status(500).send({
+            message:
+                "Some error ocurred while retrieving tutorials."
+        });
+    else
+        res.send(data);
     });
 };
