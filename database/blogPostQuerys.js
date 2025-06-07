@@ -112,4 +112,25 @@ blogPost.remove = (id, result) => {
     })
 }
 
+blogPost.getPaginated = (offset, result) => {
+    
+    console.log(offset)
+
+    let query = `SELECT * FROM POST ORDER BY CREATE_DATE DESC LIMIT 5 OFFSET ${offset}`;
+
+    sql.query(query, (err, res) => {
+        
+        if (err) {
+
+            console.log("Error: " + err);
+            result(null, err);
+            return;
+        }        
+
+        console.log(`Posts: ${res}`);
+        result(null, res);
+    });
+
+}
+
 module.exports = blogPost;

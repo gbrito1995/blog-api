@@ -21,6 +21,7 @@ router.get('/user/checkToken', checkToken);
 router.post('/post/create', validateToken, blogPosts.createPost);
 router.get('/post/all', validateToken, blogPosts.findAll);
 router.get('/post/:id(\\d+)',validateToken, blogPosts.findById);
+router.get('/post/limited',validateToken, blogPosts.findPaginated);
 router.delete('/post/:id(\\d+)', validateToken, blogPosts.remove);
 router.put('/post/:id(\\d+)', validateToken, blogPosts.update);
 

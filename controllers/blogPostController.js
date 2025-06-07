@@ -98,4 +98,24 @@ exports.update = (req, res) => {
             });
         else res.send(data);
     });
-}
+};
+
+exports.findPaginated = (req, res) => {    
+
+    if (!req.body) {
+
+        res.status(400).send({
+            message: "Content can not be null."
+        })
+    }  
+    
+        blogPost.getPaginated(req.body.offset, (err, data) => {
+        if (err)                
+            res.status(500).send({
+                message:
+                    err.message || "Some error ocurred while retrieving tutorials."
+            });
+        else
+            res.send(data);
+    });
+};
