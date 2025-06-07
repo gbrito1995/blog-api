@@ -27,18 +27,18 @@ user.create = (user, result) => {
     });
 }
 
-user.logIn = (user, result) => {
+user.logIn = (user, result) => {    
 
     let query = `SELECT * FROM USER_CMS WHERE USER = ?`;
 
     sql.query(query, [user.user],  (err, res) => {
 
         if (err) {
-            console.log(err);
+            
             result(null, err);
             return;
-        }    
-        
+        }                    
+
         return result(null, res);
     });
 }

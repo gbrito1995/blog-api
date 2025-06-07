@@ -57,39 +57,44 @@ exports.loginUser = (req, res) => {
     }
 
     login.logIn(user, (err, data) => {
-
+                
         if(err) {
 
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while login in the user."
+                    err.message || "Some error occurred while login in."
             })
 
             return;
         }
+                                                             
 
-        if (data) {                           
-                        
-            if (bcrypt.compareSync(user.password, data[0].PASSWORD)) {
-                
-                let token = jwt.sign(
-                    { 
-                        user: data[0].USER,
-                        active: data[0].ACTIVE
-                    }, 
-                    `${process.env.SECRET_PASS}`, 
-                    { expiresIn: '8h' }
-                );  
+        if (data.length == 0) {
 
-                res.send({accessToken: token});        
-                return;
-            }
+            res.send("Either usernarme or password is wrong.");
+            return;
+        } 
+
+        if (bcrypt.compareSync(user.password, data[0].PASSWORD)) {
             
+            let token = jwt.sign(
+                { 
+                    user: data[0].USER,
+                    active: data[0].ACTIVE
+                }, 
+                `${process.env.SECRET_PASS}`, 
+                { expiresIn: '8h' }
+            );  
+
+            res.send({accessToken: token});        
+            return;
+        } 
+        else {
+
             res.send("Either usernarme or password is wrong.");
             return;
         }   
-        
-        else res.status(500).send("Something wrong with the service. Try later.");
+            
     });
 
 }
