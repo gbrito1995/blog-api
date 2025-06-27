@@ -30,7 +30,7 @@ router.put('/post/:id(\\d+)', validateToken, blogPosts.update);
  //   /_\ | |__  ___ _  _| |_|  \/  |___ 
  //  / _ \| '_ \/ _ \ || |  _| |\/| / -_)
  // /_/ \_\_.__/\___/\_,_|\__|_|  |_\___|
-router.post('/about-me', aboutMeInfo.updateAboutMe);
+router.put('/about-me', aboutMeInfo.updateAboutMe);
 router.get('/about-me', aboutMeInfo.findAboutMe);
 
 module.exports = router;

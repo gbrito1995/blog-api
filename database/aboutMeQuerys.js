@@ -5,21 +5,6 @@ const aboutMe = () => {
     this.about_me = ""
 }
 
-aboutMe.create = (aboutMe, result) => {
-
-    let query = "INSERT INTO ABOUT_ME SET ?";
-
-    sql.query(query, aboutMe, (err, res) =>{
-
-        if (err) {
-            result(null, err);
-            return;
-        }
-
-        result(null, {id: res.insertId})
-    });
-}
-
 aboutMe.update = (aboutMe, result) => {
 
     let query = "UPDATE ABOUT_ME SET ABOUT_ME = ? WHERE ID = ?";
