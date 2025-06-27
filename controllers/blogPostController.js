@@ -100,9 +100,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.findPaginated = (req, res) => {    
-    
-    console.table(req.params)
+exports.findPaginated = (req, res) => {        
 
     blogPost.getPaginated(req.params.offset, (err, data) => {
     if (err)                

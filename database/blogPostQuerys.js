@@ -116,7 +116,7 @@ blogPost.getPaginated = (offset, result) => {
     
     console.log(offset)
 
-    let query = `SELECT * FROM POST ORDER BY CREATE_DATE DESC LIMIT 5 OFFSET ${offset}`;
+    let query = `SELECT * FROM POST ORDER BY CREATE_DATE DESC LIMIT 1 OFFSET ${offset}`;
 
     sql.query(query, (err, res) => {
         

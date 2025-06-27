@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const blogPosts = require('../controllers/blogPostController.js');
+const aboutMeInfo = require('../controllers/aboutMeController.js');
 const login = require('../controllers/loginController.js');
 var validateToken = require('../middlewares/validateToken.js'); 
 const checkToken = require('../controllers/checkToken.js');
@@ -24,5 +25,12 @@ router.get('/post/:id(\\d+)',validateToken, blogPosts.findById);
 router.get('/post/offset/:offset(\\d+)', blogPosts.findPaginated);
 router.delete('/post/:id(\\d+)', validateToken, blogPosts.remove);
 router.put('/post/:id(\\d+)', validateToken, blogPosts.update);
+
+ //    _   _              _   __  __     
+ //   /_\ | |__  ___ _  _| |_|  \/  |___ 
+ //  / _ \| '_ \/ _ \ || |  _| |\/| / -_)
+ // /_/ \_\_.__/\___/\_,_|\__|_|  |_\___|
+router.post('/about-me', aboutMeInfo.updateAboutMe);
+router.get('/about-me', aboutMeInfo.findAboutMe);
 
 module.exports = router;
