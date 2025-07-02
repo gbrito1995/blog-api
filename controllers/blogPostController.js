@@ -66,6 +66,22 @@ exports.findById = (req, res) => {
     });
 };
 
+exports.findByTitle = (req, res) => {
+    
+    var title = req.query.title.replace(/_/g, ' ');
+    console.log(title);
+
+    blogPost.getByTitle(title, (err, data) =>{
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error ocurred while retrieving post."
+            });
+        else
+            res.send(data);        
+    });
+};
+
 exports.remove = (req, res) => {
 
     console.table(req.body);

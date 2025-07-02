@@ -73,6 +73,24 @@ blogPost.getById = (id, result) => {
     })
 }
 
+blogPost.getByTitle = (title, result) => {
+
+    let query = `SELECT * FROM POST WHERE TITLE = '${title}' ORDER BY CREATE_DATE DESC`;    
+
+    sql.query(query, (err, res) => {
+
+        if (err) {
+            console.log("Error: " + err);
+            result(null, err);
+            return;
+        }
+        
+        console.log(res);
+
+        result(null, res[0]);
+    })
+}
+
 blogPost.getList = (result) => {    
     
     let query = `SELECT ID,TITLE, CREATE_DATE FROM POST ORDER BY CREATE_DATE DESC`;    

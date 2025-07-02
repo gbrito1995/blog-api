@@ -20,8 +20,9 @@ router.get('/user/checkToken', checkToken);
 // |  _/ (_) \__ \ | |  
 // |_|  \___/|___/ |_|  
 router.post('/post/create', validateToken, blogPosts.createPost);
-router.get('/post', validateToken, blogPosts.findList);
-router.get('/post/all', validateToken, blogPosts.findAll);
+router.get('/post/all', blogPosts.findList);
+router.get('/post/?', blogPosts.findByTitle);
+//router.get('/post/all', validateToken, blogPosts.findAll);
 router.get('/post/:id(\\d+)',validateToken, blogPosts.findById);
 router.get('/post/offset/:offset(\\d+)', blogPosts.findPaginated);
 router.delete('/post/:id(\\d+)', validateToken, blogPosts.remove);
