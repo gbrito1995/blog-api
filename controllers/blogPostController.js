@@ -40,6 +40,19 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findList = (req, res) => {
+
+    blogPost.getList((err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error ocurred while retrieving data."
+        });
+        else
+            res.send(data);
+    });
+}
+
 exports.findById = (req, res) => {
 
     blogPost.getById(req.params.id, (err, data) =>{

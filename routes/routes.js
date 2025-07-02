@@ -20,6 +20,7 @@ router.get('/user/checkToken', checkToken);
 // |  _/ (_) \__ \ | |  
 // |_|  \___/|___/ |_|  
 router.post('/post/create', validateToken, blogPosts.createPost);
+router.get('/post', validateToken, blogPosts.findList);
 router.get('/post/all', validateToken, blogPosts.findAll);
 router.get('/post/:id(\\d+)',validateToken, blogPosts.findById);
 router.get('/post/offset/:offset(\\d+)', blogPosts.findPaginated);
