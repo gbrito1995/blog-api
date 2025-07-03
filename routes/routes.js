@@ -22,7 +22,7 @@ router.get('/user/checkToken', checkToken);
 router.post('/post/create', validateToken, blogPosts.createPost);
 router.get('/post/all', blogPosts.findList);
 router.get('/post/?', blogPosts.findByTitle);
-//router.get('/post/all', validateToken, blogPosts.findAll);
+router.get('/post/all-content', validateToken, blogPosts.findAll);
 router.get('/post/:id(\\d+)',validateToken, blogPosts.findById);
 router.get('/post/offset/:offset(\\d+)', blogPosts.findPaginated);
 router.delete('/post/:id(\\d+)', validateToken, blogPosts.remove);
@@ -32,7 +32,7 @@ router.put('/post/:id(\\d+)', validateToken, blogPosts.update);
  //   /_\ | |__  ___ _  _| |_|  \/  |___ 
  //  / _ \| '_ \/ _ \ || |  _| |\/| / -_)
  // /_/ \_\_.__/\___/\_,_|\__|_|  |_\___|
-router.put('/about-me', aboutMeInfo.updateAboutMe);
+router.put('/about-me', validateToken, aboutMeInfo.updateAboutMe);
 router.get('/about-me', aboutMeInfo.findAboutMe);
 
 module.exports = router;
