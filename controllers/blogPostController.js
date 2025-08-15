@@ -13,7 +13,8 @@ exports.createPost = (req, res) => {
         id: 0,
         title: req.body.title,
         content: req.body.content,
-        create_date: new Date()
+        create_date: new Date(),
+        active: req.body.active
     }
 
     blogPost.create(post, (err, data) => {
@@ -115,7 +116,8 @@ exports.update = (req, res) => {
         id: req.params.id,
         title: req.body.title,
         content: req.body.content,
-        create_date: req.body.create_date
+        create_date: req.body.create_date,
+        active: req.body.active
     }    
 
     blogPost.update(post, (err, data) => {

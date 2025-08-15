@@ -5,6 +5,7 @@ const blogPost = () => {
     this.title = "",
     this.content = ""
     this.create_date = new Date()
+    this.active = ""
 }
 
 
@@ -24,9 +25,9 @@ blogPost.create = (blogPost, result) => {
 
 blogPost.update = (blogPost, result) => {    
 
-    let query = `UPDATE POST SET TITLE = ?, CONTENT = ? WHERE ID = ?`
+    let query = `UPDATE POST SET TITLE = ?, CONTENT = ?, ACTIVE = ? WHERE ID = ?`
     
-    sql.query(query, [blogPost.title, blogPost.content, blogPost.id], (err, res) => {
+    sql.query(query, [blogPost.title, blogPost.content, blogPost.active, blogPost.id], (err, res) => {
 
         if (err) {
             result(null, err);
