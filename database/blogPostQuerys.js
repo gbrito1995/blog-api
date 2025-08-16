@@ -94,7 +94,7 @@ blogPost.getByTitle = (title, result) => {
 
 blogPost.getList = (result) => {    
     
-    let query = `SELECT ID,TITLE, CREATE_DATE FROM POST ORDER BY CREATE_DATE DESC`;    
+    let query = `SELECT ID,TITLE, CREATE_DATE FROM POST WHERE ACTIVE = '1' ORDER BY CREATE_DATE DESC`;    
 
     sql.query(query, (err, res) => {
 
