@@ -1,10 +1,11 @@
 const sql = require('./db.js');
 
+
 const blogPost = () => {
     this.id = 0,
     this.title = "",
     this.content = ""
-    this.create_date = new Date()
+    this.create_date = new Date(),
     this.active = ""
 }
 
@@ -96,14 +97,14 @@ blogPost.getList = (result) => {
     
     let query = `SELECT ID,TITLE, CREATE_DATE FROM POST WHERE ACTIVE = '1' ORDER BY CREATE_DATE DESC`;    
 
-    sql.query(query, (err, res) => {
+    sql.query(query, (err, res, fields) => {
 
         if (err) {
             console.log("Error: " + err);
             result(null, err);
             return;
         }
-        
+           
         result(null, res);
     })
 }

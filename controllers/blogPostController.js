@@ -1,4 +1,5 @@
 const blogPost = require('../database/blogPostQuerys.js');
+const utils = require('../helpers/utils.js');
 
 exports.createPost = (req, res) => {
 
@@ -36,8 +37,17 @@ exports.findAll = (req, res) => {
                 message:
                     err.message || "Some error ocurred while retrieving tutorials."
             });
-        else
+        else {
+                if(data.length > 0) {
+                
+                    for(let i = 0; i < data.length; i++) {
+                        data[i].CREATE_DATE = utils.FormatDate(data[i].CREATE_DATE);
+                    }
+                }
+
             res.send(data);
+        }
+            
     });
 };
 
@@ -49,8 +59,17 @@ exports.findList = (req, res) => {
                 message:
                     err.message || "Some error ocurred while retrieving data."
         });
-        else
+        else {
+
+            if(data.length > 0) {
+                
+                for(let i = 0; i < data.length; i++) {
+                    data[i].CREATE_DATE = utils.FormatDate(data[i].CREATE_DATE);
+                }
+            }
+
             res.send(data);
+        }
     });
 }
 
@@ -69,8 +88,7 @@ exports.findById = (req, res) => {
 
 exports.findByTitle = (req, res) => {
     
-    var title = req.query.title.replace(/_/g, ' ');
-    console.log(title);
+    var title = req.query.title.replace(/_/g, ' ');    
 
     blogPost.getByTitle(title, (err, data) =>{
         if (err)
@@ -78,8 +96,14 @@ exports.findByTitle = (req, res) => {
                 message:
                     err.message || "Some error ocurred while retrieving post."
             });
-        else
-            res.send(data);        
+        else {            
+
+            if(data != null) 
+                data.CREATE_DATE = utils.FormatDate(data.CREATE_DATE);
+            
+            res.send(data);            
+        }
+            
     });
 };
 
